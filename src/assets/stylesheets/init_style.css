@@ -1,0 +1,44 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Microsoft Yahei";
+  box-sizing: border-box, padding-box;
+}
+h1 {
+  font-size: 0.28rem;
+}
+h2 {
+  font-size: 0.24rem;
+}
+h3 {
+  font-size: 0.2rem;
+}
+h4 {
+  font-size: 0.18rem;
+}
+h5 {
+  font-size: 0.16rem;
+}
+h6 {
+  font-size: 0.14rem;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  color: #373a3e;
+}
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+:root {
+  --van-popover-action-width: 5.63rem;
+}

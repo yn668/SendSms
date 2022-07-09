@@ -1,0 +1,13 @@
+:root {
+  --van-nav-bar-background-color: #ffffff;
+  --van-nav-bar-title-text-color: #000000;
+  --van-tabs-nav-background-color: #ffffff;
+  --van-border-color: #ffffff;
+  --van-tab-active-text-color: #000000;
+  --van-tabbar-background-color: #ffffff;
+  --van-tabbar-item-active-background-color: #ffffff;
+  --van-cell-background-color: #ffffff;
+  --van-search-background-color: #ffffff;
+  --van-search-content-background-color: rgba(253, 252, 252, 0.968);
+  --van-cell-text-color: #000000;
+}
