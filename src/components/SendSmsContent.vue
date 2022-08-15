@@ -1,16 +1,43 @@
 <template>
   <div class="sendSmsContent">
-    <van-field class="recipient" v-model="phone_numbers" label-width="3.5em" label="收件人" :autofocus="true"
-      :formatter="formatter" round placeholder="请输入收件人手机号,如有多个号码请用,分开" />
+    <van-field
+      class="recipient"
+      v-model="phone_numbers"
+      label-width="3.5em"
+      label="收件人"
+      :autofocus="true"
+      :formatter="formatter"
+      round
+      placeholder="请输入收件人手机号,如有多个号码请用,分开"
+    />
     <div class="sendMain">
-      <div :id="'zm_' + index" v-for="(item, index) in sendList" :key="index">
-        <p>{{ item }}</p>
+      <div v-for="(item, index) in sendList" :key="index">
+        <div :id="'zm_6'" style="float:left" v-if="item.type === 1">
+          <p>{{ item.content }}</p>
+        </div>
+        <div :id="'zm_0'" style="float:right" v-if="item.type === 2">
+          <p>{{ item.content }}</p>
+        </div>
       </div>
     </div>
-    <van-field class="sendContent" v-model="msg_content" rows="1" label-width="2.5em" autosize label="内容" maxlength="70"
-      type="textarea" placeholder="请输入发信内容">
+    <van-field
+      class="sendContent"
+      v-model="msg_content"
+      rows="1"
+      label-width="2.5em"
+      autosize
+      label="内容"
+      maxlength="70"
+      type="textarea"
+      placeholder="请输入发信内容"
+    >
       <template #button>
-        <van-popover v-model:show="showPopover" :actions="actions" @select="onSelect" placement="top">
+        <van-popover
+          v-model:show="showPopover"
+          :actions="actions"
+          @select="onSelect"
+          placement="top"
+        >
           <template #reference>
             <svg class="icon sim" aria-hidden="true">
               <use class="con-SIMqia" xlink:href="#icon-Simcard"></use>
@@ -36,6 +63,7 @@ export default defineComponent({
   name: "sendSmsContent",
   props: {
     number: String,
+    smsContent: Object,
     key: Number
   },
   setup(props, { emit }) {
@@ -50,6 +78,9 @@ export default defineComponent({
     ];
     if (props.number) {
       phone_numbers.value = props.number
+    }
+    if (props.smsContent) {
+       sendList.value.push(props.smsContent)
     }
     const close = () => {
       sendList.value = []
@@ -81,10 +112,14 @@ export default defineComponent({
             message: '短信发送成功',
             icon: 'https://img.ichuguang.com/imgs/2022/06/7c682f7e147a30ce.png',
           })
-          sendList.value.push(msg_content.value)
+        const data=   {
+            content:msg_content.value,
+            type:2
+          }
+          sendList.value.push(data)
           setTimeout(() => {
             emit('close')
-          }, 1500);
+          }, 2500);
         } else {
           Toast({
             message: '短信发送失败',
@@ -124,151 +159,52 @@ export default defineComponent({
 
     /*WordPress宇宙超级无敌美化框 by:zmki  www.zmki.cn/5458.html*/
     #zm_0,
-    #zm_1,
-    #zm_2,
-    #zm_3,
-    #zm_4,
-    #zm_5,
-    #zm_6,
-    #zm_7,
-    #zm_8 {
+    #zm_6{
       /*圆角值,在此定义*/
       border-radius: 1.25rem;
       width: 60%;
       height: auto;
       float: right;
-    }
-
-    /*迷幻紫*/
-    #zm_2 {
-      color: #555555;
-      overflow: hidden;
-      margin: 10px 0;
-      padding: 15px 15px 15px 35px;
-      /*border-radius: 10px;*/
-      box-shadow: 6px 0 12px -5px rgb(190, 196, 252),
-        -6px 0 12px -5px rgb(189, 196, 252);
-      background-color: #8ec5fc;
-      background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
-      background-image: -webkit-linear-gradient(62deg,
-          #8ec5fc 0%,
-          #e0c3fc 100%);
-    }
-
-    /*西瓜红*/
-    #zm_1 {
-      color: #555555;
-      overflow: hidden;
-      margin: 10px 0;
-      padding: 15px 15px 15px 35px;
-      /*border-radius: 10px;*/
-      box-shadow: 6px 0 12px -5px rgb(255, 176, 172),
-        -6px 0 12px -5px rgb(255, 161, 174);
-      background-color: #ff9a8b66;
-      background-image: linear-gradient(220deg,
-          #ff9a8b 0%,
-          #ff6a8838 55%,
-          #ff99ac 100%);
-      background-image: -webkit-linear-gradient(220deg,
-          #ff9a8b7a 0%,
-          #ff6a88ab 55%,
-          #ff99ac82 100%);
-    }
-
-    /*华为P30 天空之境*/
-    #zm_3 {
-      color: #555555;
-      overflow: hidden;
-      margin: 10px 0;
-      padding: 15px 15px 15px 35px;
-      /*border-radius: 10px;*/
-      box-shadow: 6px 0 12px -5px rgb(253, 223, 234),
-        -6px 0 12px -5px rgb(215, 240, 243);
-      background-color: #ffdee9;
-      background-image: linear-gradient(0deg, #ffdee9c4 0%, #b5fffc8f 100%);
-      background-image: -webkit-linear-gradient(0deg,
-          #ffdee9c4 0%,
-          #b5fffc8f 100%);
+      word-break: break-all;
     }
 
     /*小宇宙*/
     #zm_0 {
       color: #eeeeee;
-      overflow: hidden;
-      margin: 10px 0;
+      overflow: auto;
+      max-height: 50vh;
+      margin: 10px 10px;
       padding: 15px 15px 15px 35px;
       /*border-radius: 10px;*/
       box-shadow: 6px 0 12px -5px rgb(12, 85, 141),
         -6px 0 12px -5px rgba(10, 58, 93, 0);
-      background-image: radial-gradient(circle 263px at 100.2% 3%,
-          rgba(12, 85, 141, 1) 31.1%,
-          rgba(205, 181, 93, 1) 36.4%,
-          rgba(244, 102, 90, 1) 50.9%,
-          rgba(199, 206, 187, 1) 60.7%,
-          rgba(249, 140, 69, 1) 72.5%,
-          rgba(12, 73, 116, 1) 72.6%);
+      background-image: radial-gradient(
+        circle 263px at 100.2% 3%,
+        rgba(12, 85, 141, 1) 31.1%,
+        rgba(205, 181, 93, 1) 36.4%,
+        rgba(244, 102, 90, 1) 50.9%,
+        rgba(199, 206, 187, 1) 60.7%,
+        rgba(249, 140, 69, 1) 72.5%,
+        rgba(12, 73, 116, 1) 72.6%
+      );
     }
 
-    /*橄榄绿*/
-    #zm_4 {
-      color: #eeeeee;
-      overflow: hidden;
-      margin: 10px 0;
-      padding: 15px 15px 15px 35px;
-      /*border-radius: 10px;*/
-      box-shadow: 6px 0 12px -5px rgb(68, 110, 92),
-        -6px 0 12px -5px rgb(204, 212, 163);
-      background-image: linear-gradient(102deg,
-          rgba(68, 110, 92, 1) 17.4%,
-          rgba(107, 156, 120, 1) 49.3%,
-          rgba(154, 183, 130, 1) 83.4%,
-          rgba(247, 237, 191, 1) 110.3%);
-    }
-
-    /*小太阳*/
-    #zm_5 {
-      color: #ffffff;
-      overflow: hidden;
-      margin: 10px 0;
-      padding: 15px 15px 15px 35px;
-      /*border-radius: 10px; */
-      box-shadow: 6px 0 12px -5px rgb(253, 223, 234),
-        -6px 0 12px -5px rgb(215, 240, 243);
-      background-image: radial-gradient(circle farthest-corner at -8.9% 51.2%,
-          rgba(255, 124, 0, 1) 0%,
-          rgba(255, 124, 0, 1) 15.9%,
-          rgba(255, 163, 77, 1) 15.9%,
-          rgba(255, 163, 77, 1) 24.4%,
-          rgba(19, 30, 37, 1) 24.5%,
-          rgba(19, 30, 37, 1) 66%);
-    }
 
     /*优雅紫*/
     #zm_6 {
       color: #ffffff;
-      overflow: hidden;
-      margin: 10px 0;
+      overflow: auto;
+      max-height: 50vh;
+      margin: 10px 10px;
       padding: 15px 15px 15px 35px;
       /*border-radius: 10px;*/
       box-shadow: 6px 0 12px -5px rgb(175, 160, 208),
         -6px 0 12px -5px rgba(177, 161, 207, 0);
-      background-image: radial-gradient(circle farthest-corner at 10% 20%,
-          rgba(95, 117, 227, 1) 0%,
-          rgba(188, 167, 205, 1) 90%);
-    }
-
-    /*深邃黑*/
-    #zm_7 {
-      color: #c7c7c7;
-      overflow: hidden;
-      margin: 10px 0;
-      padding: 15px 15px 15px 35px;
-      /*border-radius: 5px;*/
-      box-shadow: 6px 0 12px -5px rgb(155, 170, 185),
-        -6px 0 12px -5px rgba(177, 161, 207, 0);
-      background-image: radial-gradient(circle farthest-corner at 10% 20%,
-          rgba(0, 0, 0, 1) 0%,
-          rgba(64, 64, 64, 1) 90.2%);
+      background-image: radial-gradient(
+        circle farthest-corner at 10% 20%,
+        rgba(95, 117, 227, 1) 0%,
+        rgba(188, 167, 205, 1) 90%
+      );
     }
   }
 

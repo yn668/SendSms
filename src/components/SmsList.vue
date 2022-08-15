@@ -7,7 +7,7 @@
         <ul>
           <li class="smsContentList" v-for="(item, index) in list" :key="index">
             <!-- 图标 -->
-            <div class="smsContentImgInfo">
+            <div class="smsContentImgInfo" @click="sendSms(item)">
               <!-- 进行短信图像生成,如果有姓名,则生成姓名图像,否则生成默认图像 -->
               <van-image round none width="2.5rem" height="2.5rem" :src="
                 item.name === `未知号码`
@@ -43,7 +43,7 @@
               </svg>
               <div class="smsContentSend">
                 <!-- 发送短信 -->
-                <svg class="icon sms" aria-hidden="true" @click="sendSms(item.number)">
+                <svg class="icon sms" aria-hidden="true" @click="sendSms(item)">
                   <use xlink:href="#icon-duanxin"></use>
                 </svg>
               </div>
@@ -126,9 +126,9 @@ export default defineComponent({
       keywords.value = v
       onRefresh()
     })
-    const sendSms = (num) => {
-      let number = num.replace(/\s+/g, '')
-      emit('openSendContent', number)
+    const sendSms = (sms) => {
+      let number = sms.number.replace(/\s+/g, '')
+      emit('openSendContent', number,sms)
     };
     return {
       list,

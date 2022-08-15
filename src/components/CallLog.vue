@@ -210,6 +210,10 @@ export default {
       align-items: center;
       justify-content: center;
       .callinfo {
+    max-width: 105px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
         p {
           font-size: 14px;
           color: @white;
