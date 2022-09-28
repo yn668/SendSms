@@ -59,10 +59,11 @@ instance.interceptors.response.use(
     if (error) {
       let time = new Date()
       Notify({  type: 'danger', message: '网络响应繁忙,请检查接口重新登录并刷新页面'});
-      localStorage.clear();
-      router.replace({ path: '/' })
-      store.dispatch('IS_LOGIN_POPUP', true)
+      // localStorage.clear();
+      // router.replace({ path: '/' })
+      // store.dispatch('IS_LOGIN_POPUP', true)
       // 异常捕捉
+      store.dispatch('HANDLE_SET_LOADING', false)
       console.warn('SMS' + error + '.' + ' ( ' + time.toLocaleString() + ' ) ')
     }
     // 返回接口返回的错误信息

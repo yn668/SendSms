@@ -44,7 +44,7 @@
             </div>
             <!-- 通话时间及其他操作 -->
             <div class="callOtherBtn">
-              <span style="margin-right: 10px">{{
+              <span style="margin-right: 0.63rem">{{
                 format(item.dateLong, "yyyy-MM-dd HH:mm:ss")
               }}</span>
               <!-- SIM卡1 -->
@@ -117,6 +117,7 @@ export default {
     const page_num = ref(1);
     const page_size = ref(10);
     onBeforeMount(() => {
+      
       })
       // 获取通话记录数据
       const getPageList = () => {
@@ -189,33 +190,33 @@ export default {
 <style scoped lang="less">
 
 #calllog {
-  padding: 8px;
+  padding: 0.5rem;
   .van-list {
     margin-bottom: 3.25rem;
   }
   .callloglist {
     position: relative;
-    margin-top: 8px;
+    margin-top: 0.5rem;
     width: 100%;
     height: 3.13rem;
     display: flex;
     align-items: center;
     justify-content: space-around;
     background-color: @list-background;
-    border: 1px solid @border-frame;
-    border-radius: 0.83rem;
+    border: .96px solid @border-frame;
+    border-radius: .83rem;
     box-sizing: border-box;
     .callImgInfo {
       display: flex;
       align-items: center;
       justify-content: center;
       .callinfo {
-    max-width: 105px;
+    width: 7.5rem;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
         p {
-          font-size: 14px;
+          font-size: 0.88rem;
           color: @white;
         }
         span {
@@ -231,7 +232,7 @@ export default {
       display: flex;
       flex-direction: column;
       span {
-        font-size: 0.88rem;
+        font-size: .88rem;
         color: @white;
       }
       .icon {
@@ -240,13 +241,13 @@ export default {
       }
       .sim {
         position: absolute;
-        top: 0.18rem;
-        right: 0.18rem;
+        top: .18rem;
+        right: .18rem;
       }
       .callSms {
         display: flex;
         justify-content: flex-end;
-        margin-right: 0.63rem;
+        margin-right: .63rem;
         .call,
         .sms {
           width: 1.8rem;

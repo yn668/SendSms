@@ -3,7 +3,8 @@
     <van-nav-bar title="设置" />
     <Cell></Cell>
     <van-cell-group inset>
-      <van-cell icon="https://img.ichuguang.com/imgs/2022/07/71c1a8c32da1772e.png" title="切换配置" is-link @click="msg" />
+      <van-cell icon="https://img.ichuguang.com/imgs/2022/07/71c1a8c32da1772e.png" title="切换配置" is-link
+        @click="switchAccount" />
       <van-cell icon="https://img.ichuguang.com/imgs/2022/07/173ff349af76e415.png" title="切换主题" is-link
         @click="switchoverTheme" />
       <van-cell icon="https://img.ichuguang.com/imgs/2022/07/21a8fbfb9459ddc6.png" title="留言反馈" is-link @click="msg" />
@@ -17,8 +18,7 @@ import store from '@/store/index.js'
 import { useRouter } from 'vue-router'
 import Util from "@/util/SmsForwardUtil";
 import Cell from '@/components/Cell.vue'
-
-import { Toast } from 'vant';
+import { Toast,Dialog } from 'vant';
 export default {
   name: "Setting",
   components: {
@@ -26,10 +26,24 @@ export default {
   },
   setup() {
     const router = useRouter();
+    const switchAccount = () => {
+      router.push({ path: '/account' })
+    }
     const logOut = () => {
-      localStorage.clear();
-      store.dispatch('IS_LOGIN_POPUP', true)
-      router.replace({ path: '/' })
+      Dialog.confirm({
+        title: '温馨提示',
+        message:
+          '如果需要修改或替换账户请选择切换配置操作,退出登录将清除所有账户数据！你确定这样做吗？'
+      })
+        .then(() => {
+          localStorage.clear();
+          store.dispatch('IS_LOGIN_POPUP', true)
+          router.replace({ path: '/' })
+        })
+        .catch(() => {
+          // on cancel
+        });
+
     }
     const msg = () => {
       Toast({
@@ -37,13 +51,14 @@ export default {
         icon: 'like-o',
       });
     }
-     const switchoverTheme = () => {
-      
-       Util.theme()
-      }
+    const switchoverTheme = () => {
+
+      Util.theme()
+    }
     return {
       logOut,
       msg,
+      switchAccount,
       switchoverTheme
     };
   },

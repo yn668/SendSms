@@ -1,9 +1,11 @@
 <template>
+<div id="APP">
   <router-view />
    <!-- 挂载全局加载动画组件 -->
   <GlobalLoadingAnimate></GlobalLoadingAnimate>
   <Popup />
   <TabBar />
+</div>
 </template>
 <script>
 import { ref, computed } from 'vue';
@@ -29,14 +31,18 @@ export default {
   },
 };
 </script>
-<style lang="less" >
-.van-popup {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  <style lang="less">
+#APP {
+  .van-popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: @dominant-tone;
+  }
+  .van-form {
+    margin-top: 5%;
+    background-color: @dominant-tone;
+  }
 }
-.van-form {
-  margin-top: 5%;
-}
-</style>
+  </style>

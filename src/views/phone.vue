@@ -1,7 +1,7 @@
 <template>
   <div class="phone">
     <div class="notice" v-show="notice">
-      <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o">
+      <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" v-if="value !== ''">
         当前查询的手机号字段为：{{ value }}
       </van-notice-bar>
       <van-icon name="cross" size="20" @click="close" class="noticeIcon" />
@@ -25,9 +25,9 @@
         <CollLog :type="3" :phone_number="value" ref="num" :key="key"></CollLog>
       </van-tab>
     </van-tabs>
-    <van-popup v-model:show="show" position="top" :style="{ height: '50px' }">
+    <van-popup v-model:show="show" position="top" :style="{ height: '3.13rem' }">
       <van-search shape="round" autofocus right-icon="search" left-icon="" @search="search" @click-right-icon="search"
-        :style="{ width: '100%', overflow: 'hidden' }" v-model="value" placeholder="请输入搜索的手机号码" />
+        :style="{ width: '100%', overflow: 'hidden' }" v-model.trim="value" placeholder="请输入搜索的手机号码" />
     </van-popup>
   </div>
 </template>
@@ -86,7 +86,7 @@ export default {
 
   .noticeIcon {
     position: absolute;
-    top: 0.8rem;
+    top: .8rem;
     right: 1.2rem;
     color:@nav-ico-text-color;
   }

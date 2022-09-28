@@ -8,7 +8,8 @@ const store = createStore({
         loginPopup: false,
         serverUrl: '',
         sign: '',
-        theme:'light'
+        theme:'light',
+        accountList:[]
     },
     mutations: {
         // 设置加载动画
@@ -28,6 +29,9 @@ const store = createStore({
         SET_THEME(state, theme) {
             state.theme = theme
         },
+        SET_ACCOUNT_LIST(state, accountList) {
+            state.accountList = accountList
+        },
     },
     actions: {
         // 设置加载动画
@@ -46,6 +50,9 @@ const store = createStore({
         },
         SAVE_THEME(context, theme) {
             context.commit('SET_THEME', theme)
+        },
+        SAVE_ACCOUNT_LIST(context, accountList) {
+            context.commit('SET_ACCOUNT_LIST', accountList)
         },
     },
     modules: {},
